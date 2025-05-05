@@ -60,7 +60,7 @@ export const Categories = ({ data }: Props) => {
   }, [data.length]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full px-1 overflow-x-clip">
       <CategoriesSidebar
         open={isSidebarOpen}
         onOpenChange={setIsSidebarOpen}

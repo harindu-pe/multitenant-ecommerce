@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { CustomCategory } from "../types";
 import { SubcategoryMenu } from "./subcategory-menu";
 import { useDropdownPosition } from "./use-dropdown-position";
+import Link from "next/link";
 
 interface Props {
   category: CustomCategory;
@@ -34,11 +35,18 @@ export const CategoryDropdown = ({
 
   const dropdownPosition = getDropdownPosition();
 
+  const toggleDropdown = () => {
+    if (category.subcategories?.length) {
+      setIsOpen(!isOpen);
+    }
+  };
+
   return (
     <div
       ref={dropdownRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={toggleDropdown}
       className="relative"
     >
       <div className="relative">
@@ -50,7 +58,9 @@ export const CategoryDropdown = ({
             isOpen && "bg-white border-primary"
           )}
         >
-          {category.name}
+          <Link href={`/${category.slug === "all" ? "" : category.slug}`}>
+            {category.name}
+          </Link>
         </Button>
         {category.subcategories && category.subcategories.length > 0 && (
           <div
